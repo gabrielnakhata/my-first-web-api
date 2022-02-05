@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using my_first_web_api.Controllers.Util;
+using my_first_web_api.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,22 +12,19 @@ namespace my_first_web_api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ValuesController : ControllerBase
+    public class ClienteController : ControllerBase
     {
-
+        // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            DAL objDAL = new DAL();
-
-          //  string sql = "insert into cliente(nome, data_cadastro, cpf_cnpj, data_nascimento, tipo, telefone, email, cep, logradouro, numero, bairro, complemento, cidade, uf)" +
-          //               "values('Gabriel', '2022/02/28', '09609089766', '1990/09/14', 'F', '998784512', 'gabrielnakata@gmail.com', '31635110', 'Rua joaquim de Figueiredo', '400', 'Barreiro', 'loja', 'Belo Horizonte', 'MG')";
-          //  objDAL.ExecutarComandoSQL(sql);
+           
 
             return new string[] { "value1", "value2" };
 
         }
 
+        // GET api/values/S
         [HttpGet("{id}")]
 
         public string Get(int id)
@@ -39,12 +37,29 @@ namespace my_first_web_api.Controllers
             return dados.Rows[0]["Nome"].ToString();
         }
 
+        // POST api/values
         [HttpPost]
+        [Route("registrarcliente")]
 
-        public void Post([FromBody]string value)
+        public ReturnAllServices RegistrarCliente([FromBody]ClienteModel dados)
         {
+            ReturnAllServices retorno = new();
+            try
+            {
+                dados.RegistrarCliente();
+                retorno.Result = true;
+                retorno.ErrorMessage = string.Empty;
+            }
+            catch(Exception ex)
+            {
+                retorno.Result = false;
+                retorno.ErrorMessage = "Erro ao tentar registrar um cliente: " + ex.Message;
+            }
+
+            return retorno;
         }
 
+        // PUT api/values/S
         [HttpPut("{id}")]
 
         public void Put(int id, [FromBody]string value)

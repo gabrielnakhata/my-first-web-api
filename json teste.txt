@@ -1,0 +1,40 @@
+       
+--------------------------COPIE OS DADOS DA MODEL DESEJADA -- E COLE -----
+
+
+ctrl + C + CTRL + H -------------SUBSTITUIÇÃO AUTOMÁTICA------- AUXILIAR A DIGITAÇÃO DA SINTAXE DO JSON
+
+
+	{
+         "Nome": "TESTE",
+         "Data_Cadastro": "24/05/2018",
+         "Cpf_Cnpj": "07099999",
+         "Data_Nascimento": "14/09/1990",
+         "Tipo": "F",
+         "Telefone": "3198765434",
+         "Email": "aluno@gmail.com",
+         "Cep": "30654232",
+         "Logradouro": "Rua Teste",
+         "Numero": "666",
+         "Bairro": "teste",
+         "Complemento": "apto 102",
+         "Cidade": "Belo Horizonte",
+         "UF": "MG",
+	}
+
+{
+"nome": "TESTE",
+"data_cadastro": "24/05/2018",
+"cpf_cnpj": "07099999",
+"data_nascimento": "14/09/1990",
+"tipo": "F",
+"telefone": "3198765434",
+"email": "aluno@gmail.com",
+"cep": "30654232",
+"logradouro": "Rua Teste",
+"numero": "666",
+"bairro": "teste",
+"complemento": "apto 102",
+"cidade": "Belo Horizonte",
+"uf": "MG",
+}
