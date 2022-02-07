@@ -16,25 +16,18 @@ namespace my_first_web_api.Controllers
     {
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Route("listagem")]
+        public List<ClienteModel> Listagem()
         {
-           
-
-            return new string[] { "value1", "value2" };
-
+            return new ClienteModel().Listagem();
         }
 
         // GET api/values/S
-        [HttpGet("{id}")]
-
-        public string Get(int id)
+        [HttpGet]
+        [Route("cliente/{id}")]
+        public ClienteModel RetornarCliente(int id)
         {
-            DAL objDAL = new DAL();
-
-            string sql = $"select * from cliente where id = {id}";
-                DataTable dados = objDAL.RetornarDataTable(sql);
-
-            return dados.Rows[0]["Nome"].ToString();
+            return new ClienteModel().RetornarCliente(id);
         }
 
         // POST api/values

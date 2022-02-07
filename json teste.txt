@@ -36,5 +36,5 @@ ctrl + C + CTRL + H -------------SUBSTITUIÇÃO AUTOMÁTICA------- AUXILIAR A DI
 "bairro": "teste",
 "complemento": "apto 102",
 "cidade": "Belo Horizonte",
-"uf": "MG",
+"uf": "MG"
 }

@@ -1,6 +1,7 @@
 ﻿using my_first_web_api.Controllers.Util;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -29,10 +30,76 @@ namespace my_first_web_api.Models
             DAL objDAL = new DAL();
 
             string sql = "insert into cliente(nome, data_cadastro, cpf_cnpj, data_nascimento, tipo, telefone, email, cep, logradouro, numero, bairro, complemento, cidade, uf)" +
-                         $"values('{Nome}', '{DateTime.Parse(Data_Cadastro).ToString("yyyy/mm/dd")}', '{Cpf_Cnpj}', '{DateTime.Parse(Data_Nascimento).ToString("yyyy/mm/dd")}', +" +
+                         $"values('{Nome}', '{DateTime.Parse(Data_Cadastro).ToString("yyyy/MM/dd")}', '{Cpf_Cnpj}', '{DateTime.Parse(Data_Nascimento).ToString("yyyy/MM/dd")}', +" +
                          $"'{Tipo}', '{Telefone}', '{Email}', '{Cep}', '{Logradouro}', '{Numero}', '{Bairro}', '{Complemento}', '{Cidade}', '{UF}')";
             objDAL.ExecutarComandoSQL(sql);
         }
 
+        // ctrl + A + CTRL + K+D IDENTAR CÓDIGO
+
+        public List<ClienteModel> Listagem()
+        {
+            List<ClienteModel> lista = new();
+            ClienteModel item;
+
+            DAL objDAL = new DAL();
+
+            string sql = "select * from cliente order by nome asc";
+            DataTable dados = objDAL.RetornarDataTable(sql);
+
+            for (int i = 0; i < dados.Rows.Count; i++)
+            {
+                item = new ClienteModel()
+                {
+                    Id = int.Parse(dados.Rows[i]["id"].ToString()),
+                    Nome = dados.Rows[i]["nome"].ToString(),
+                    Data_Cadastro = DateTime.Parse(dados.Rows[i]["data_cadastro"].ToString()).ToString("yyyy/MM/dd"),
+                    Cpf_Cnpj = dados.Rows[i]["cpf_cnpj"].ToString(),
+                    Data_Nascimento = DateTime.Parse(dados.Rows[i]["data_nascimento"].ToString()).ToString("yyyy/MM/dd"),
+                    Tipo = dados.Rows[i]["tipo"].ToString(),
+                    Telefone = dados.Rows[i]["telefone"].ToString(),
+                    Email = dados.Rows[i]["email"].ToString(),
+                    Cep = dados.Rows[i]["cep"].ToString(),
+                    Logradouro = dados.Rows[i]["logradouro"].ToString(),
+                    Numero = dados.Rows[i]["numero"].ToString(),
+                    Bairro = dados.Rows[i]["bairro"].ToString(),
+                    Cidade = dados.Rows[i]["cidade"].ToString(),
+                    UF = dados.Rows[i]["uf"].ToString()
+                };
+
+                lista.Add(item);
+            }
+            return lista;
+        }
+        public ClienteModel RetornarCliente(int id)
+        {
+            ClienteModel item;
+            DAL objDAL = new DAL();
+
+            string sql = $"select * from cliente where id = {id}";
+            DataTable dados = objDAL.RetornarDataTable(sql);
+
+            item = new ClienteModel()
+            {
+                Id = int.Parse(dados.Rows[0]["id"].ToString()),
+                Nome = dados.Rows[0]["nome"].ToString(),
+                Data_Cadastro = DateTime.Parse(dados.Rows[0]["data_cadastro"].ToString()).ToString("yyyy/MM/dd"),
+                Cpf_Cnpj = dados.Rows[0]["cpf_cnpj"].ToString(),
+                Data_Nascimento = DateTime.Parse(dados.Rows[0]["data_nascimento"].ToString()).ToString("yyyy/MM/dd"),
+                Tipo = dados.Rows[0]["tipo"].ToString(),
+                Telefone = dados.Rows[0]["telefone"].ToString(),
+                Email = dados.Rows[0]["email"].ToString(),
+                Cep = dados.Rows[0]["cep"].ToString(),
+                Logradouro = dados.Rows[0]["logradouro"].ToString(),
+                Numero = dados.Rows[0]["numero"].ToString(),
+                Bairro = dados.Rows[0]["bairro"].ToString(),
+                Cidade = dados.Rows[0]["cidade"].ToString(),
+                UF = dados.Rows[0]["uf"].ToString()
+            };
+
+            return item;
+        }
+
     }
 }
+
