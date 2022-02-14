@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using my_first_web_api.Controllers.Util;
 using my_first_web_api.Models;
+using my_first_web_api.Util;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,6 +16,12 @@ namespace my_first_web_api.Controllers
     [Route("[controller]")]
     public class ClienteController : ControllerBase
     {
+        Autenticacao AuteticacaoServico;
+        public ClienteController(IHttpContextAccessor context)
+        {
+            AuteticacaoServico = new Autenticacao(context);
+        }
+
         // GET api/values
         [HttpGet]
         [Route("listagem")]
@@ -77,9 +85,22 @@ namespace my_first_web_api.Controllers
         // DELETE api/values/S
         [HttpDelete]
         [Route("excluir/{id}")]
-        public void Delete(int id)
+        public ReturnAllServices Excluir(int id)
         {
-            new ClienteModel().Excluir(id);  
+            ReturnAllServices retorno = new();
+            try
+            {
+                retorno.Result = true;
+                retorno.ErrorMessage = "Cliente Excluido com sucesso!";
+                AuteticacaoServico.Autenticar();
+                new ClienteModel().Excluir(id);
+            }
+            catch(Exception ex)
+            {
+                retorno.Result = false;
+                retorno.ErrorMessage = ex.Message;
+            }
+            return retorno;
         }
     }
 }
