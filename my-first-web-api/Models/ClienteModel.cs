@@ -25,6 +25,37 @@ namespace my_first_web_api.Models
         public string Cidade { get; set; }
         public string UF { get; set; }
 
+        public void AtualizarCliente()
+        {
+            DAL objDAL = new DAL();
+
+            string sql = "update cliente set " +
+                          $"nome = '{Nome}' , " +
+                          $"data_cadastro = '{DateTime.Parse(Data_Cadastro).ToString("yyyy/MM/dd")}', " +
+                          $"cpf_cnpj = '{Cpf_Cnpj}', " +
+                          $"data_nascimento = '{DateTime.Parse(Data_Nascimento).ToString("yyyy/MM/dd")}', " +
+                          $"tipo = '{Tipo}', " +
+                          $"telefone = '{Telefone}', " +
+                          $"email = '{Email}', " +
+                          $"cep = '{Cep}', " +
+                          $"logradouro = '{Logradouro}', " +
+                          $"numero = '{Numero}', " +
+                          $"bairro = '{Bairro}', " +
+                          $"complemento = '{Complemento}', " +
+                          $"cidade = '{Cidade}', " +
+                          $"uf = '{UF}' where id={Id}";
+
+            objDAL.ExecutarComandoSQL(sql);
+        }
+
+        public void Excluir(int id)
+        {
+            DAL objDAL = new DAL();
+
+            string sql = $"delete from cliente where id = {id}";
+            objDAL.ExecutarComandoSQL(sql);
+        }
+
         public void RegistrarCliente()
         {
             DAL objDAL = new DAL();
@@ -35,7 +66,6 @@ namespace my_first_web_api.Models
             objDAL.ExecutarComandoSQL(sql);
         }
 
-        // ctrl + A + CTRL + K+D IDENTAR CÓDIGO
 
         public List<ClienteModel> Listagem()
         {

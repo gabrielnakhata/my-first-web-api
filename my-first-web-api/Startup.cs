@@ -31,6 +31,7 @@ namespace my_first_web_api
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "my_first_web_api", Version = "v1" });
+             //  c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
             });
         }
 

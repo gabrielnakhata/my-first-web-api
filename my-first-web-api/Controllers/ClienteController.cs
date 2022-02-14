@@ -34,7 +34,7 @@ namespace my_first_web_api.Controllers
         [HttpPost]
         [Route("registrarcliente")]
 
-        public ReturnAllServices RegistrarCliente([FromBody]ClienteModel dados)
+        public ReturnAllServices RegistrarCliente([FromBody] ClienteModel dados)
         {
             ReturnAllServices retorno = new();
             try
@@ -43,7 +43,7 @@ namespace my_first_web_api.Controllers
                 retorno.Result = true;
                 retorno.ErrorMessage = string.Empty;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 retorno.Result = false;
                 retorno.ErrorMessage = "Erro ao tentar registrar um cliente: " + ex.Message;
@@ -53,10 +53,33 @@ namespace my_first_web_api.Controllers
         }
 
         // PUT api/values/S
-        [HttpPut("{id}")]
+        [HttpPut]
+        [Route("atualizar/{id}")]
+        public ReturnAllServices Atualizar(int id, [FromBody] ClienteModel dados)
+        {
+            ReturnAllServices retorno = new();
+            try
+            {
+                dados.Id = id;
+                dados.AtualizarCliente();
+                retorno.Result = true;
+                retorno.ErrorMessage = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                retorno.Result = false;
+                retorno.ErrorMessage = "Erro ao tentar atualizar um cliente: " + ex.Message;
+            }
 
-        public void Put(int id, [FromBody]string value)
-        { 
+            return retorno;
+
+        }
+        // DELETE api/values/S
+        [HttpDelete]
+        [Route("excluir/{id}")]
+        public void Delete(int id)
+        {
+            new ClienteModel().Excluir(id);  
         }
     }
 }
