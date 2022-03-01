@@ -16,29 +16,28 @@ namespace my_first_web_api.Controllers
     [Route("[controller]")]
     public class ClienteController : ControllerBase
     {
-        Autenticacao AuteticacaoServico;
+        Autenticacao AutenticacaoServico;
         public ClienteController(IHttpContextAccessor context)
         {
-            AuteticacaoServico = new Autenticacao(context);
+            AutenticacaoServico = new Autenticacao(context);
         }
 
-        // GET api/values
         [HttpGet]
         [Route("listagem")]
         public List<ClienteModel> Listagem()
         {
+            AutenticacaoServico.Autenticar();
             return new ClienteModel().Listagem();
         }
 
-        // GET api/values/S
         [HttpGet]
         [Route("cliente/{id}")]
         public ClienteModel RetornarCliente(int id)
         {
+            AutenticacaoServico.Autenticar();
             return new ClienteModel().RetornarCliente(id);
         }
 
-        // POST api/values
         [HttpPost]
         [Route("registrarcliente")]
 
@@ -47,9 +46,10 @@ namespace my_first_web_api.Controllers
             ReturnAllServices retorno = new();
             try
             {
+                AutenticacaoServico.Autenticar();
                 dados.RegistrarCliente();
                 retorno.Result = true;
-                retorno.ErrorMessage = string.Empty;
+                retorno.ErrorMessage = "Cliente registrado com sucesso!";
             }
             catch (Exception ex)
             {
@@ -60,7 +60,6 @@ namespace my_first_web_api.Controllers
             return retorno;
         }
 
-        // PUT api/values/S
         [HttpPut]
         [Route("atualizar/{id}")]
         public ReturnAllServices Atualizar(int id, [FromBody] ClienteModel dados)
@@ -69,9 +68,10 @@ namespace my_first_web_api.Controllers
             try
             {
                 dados.Id = id;
+                AutenticacaoServico.Autenticar();
                 dados.AtualizarCliente();
                 retorno.Result = true;
-                retorno.ErrorMessage = string.Empty;
+                retorno.ErrorMessage = "Cliente atualizado com sucesso!";
             }
             catch (Exception ex)
             {
@@ -82,7 +82,7 @@ namespace my_first_web_api.Controllers
             return retorno;
 
         }
-        // DELETE api/values/S
+
         [HttpDelete]
         [Route("excluir/{id}")]
         public ReturnAllServices Excluir(int id)
@@ -91,8 +91,8 @@ namespace my_first_web_api.Controllers
             try
             {
                 retorno.Result = true;
-                retorno.ErrorMessage = "Cliente Excluido com sucesso!";
-                AuteticacaoServico.Autenticar();
+                retorno.ErrorMessage = "Cliente excluido com sucesso!";
+                AutenticacaoServico.Autenticar();
                 new ClienteModel().Excluir(id);
             }
             catch(Exception ex)
