@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AplicacaoCliente
+namespace aplication_client
 {
     public class Startup
     {

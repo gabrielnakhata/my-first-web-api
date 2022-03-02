@@ -1,4 +1,4 @@
-﻿using AplicacaoCliente.Models;
+﻿using aplication_client.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AplicacaoCliente.Controllers
+namespace aplication_client.Controllers
 {
     public class HomeController : Controller
     {
