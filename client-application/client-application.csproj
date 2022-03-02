@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>aplication_client</RootNamespace>
+    <RootNamespace>client_application</RootNamespace>
   </PropertyGroup>
 
 </Project>
