@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using client_application.Util;
+using Newtonsoft.Json;
 
 namespace client_application.Models
 {
@@ -25,7 +27,10 @@ namespace client_application.Models
 
         public List<ClienteModel> ListarTodosClientes()
         {
-            List <ClienteModel> = new();
+            List<ClienteModel> retorno = new();
+            string Json = WebAPI.RequestGET("Cliente", "listagem");
+            retorno = JsonConvert.DeserializeObject<List<ClienteModel>>(Json);
+            return retorno;
         }
     }
 }

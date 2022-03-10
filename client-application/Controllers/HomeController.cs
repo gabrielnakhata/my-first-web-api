@@ -11,15 +11,10 @@ namespace client_application.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index()
         {
+            ClienteModel objCliente = new();
+            ViewBag.ListarClientes = objCliente.ListarTodosClientes();
             return View();
         }
 

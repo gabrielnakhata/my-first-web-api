@@ -10,7 +10,7 @@ namespace client_application.Util
 {
     public class WebAPI
     {
-        public static string URI = "https://localhost:44391/";
+        public static string URI = "https://localhost:5002/";
         public static string TOKEN = "123GNK446";
 
         public static string RequestGET(string metodo, string parametro)

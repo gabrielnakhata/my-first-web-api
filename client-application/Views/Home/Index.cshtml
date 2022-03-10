@@ -1,1 +1,20 @@
-﻿
+﻿<table class="table-bordered">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>NOME</td>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in (List<ClienteModel>)ViewBag.ListarClientes)
+        {
+            <tr>
+                <td>@item.Id.ToString()</td>
+                <td>@item.Nome.ToString()</td>
+            </tr>
+        }
+
+
+    </tbody>
+</table>
